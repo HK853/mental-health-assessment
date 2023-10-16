@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Mooli&family=Poppins:wght@300;400&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: transparent;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 10px;
+    padding: 10px;
+    font-size: 24px;
+    color: #fff;
+    font-weight: 700;
+}
+
+cite {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+
+a{
+    margin: 20px;
+    padding: 20px;
+    transform: translateX(40%);
+}
+
+.btn {
+    width: 50%;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+label {
+    font-size: 18px;
+    color: #fff;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+#range-value {
+    display: inline-block;
+    font-size: 16px;
+    color: #007BFF;
+    margin-left: 10px;
+}

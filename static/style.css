@@ -27,7 +27,7 @@ body {
 h1 {
     font-size: 24px;
     text-align: center;
-    color: #333;
+    color: #636363;
     margin-bottom: 20px;
 }
 
@@ -48,7 +48,7 @@ input[type="range"] {
     margin: 0;
     -webkit-appearance: none;
     appearance: none;
-    margin-top: 8%;
+    margin-top: 5%;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -82,7 +82,7 @@ input[type="submit"] {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 12%;
+    margin-top: 8%;
 }
 
 /* Style the result section */

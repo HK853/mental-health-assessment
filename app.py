@@ -7,25 +7,44 @@ app.secret_key = 'your_secret_key'  # Replace with a secure secret key
 
 # Define questions for each condition
 stress_questions = [
-    "How often do you feel overwhelmed by stress?",
-    "How often do you have trouble sleeping due to stress?",
-    "How often do you experience physical symptoms like headaches or stomachaches due to stress?",
-    "How often do you find it hard to make decisions or think clearly due to stress?"
+    "1. How often do you feel overwhelmed by stress?",
+    "2. How often do you have trouble sleeping due to stress?",
+    "3. How often do you experience physical symptoms like headaches or stomachaches due to stress?",
+    "4. How often do you find it hard to make decisions or think clearly due to stress?",
+    "5. How often do you feel irritable or short-tempered due to stress?",
+    "6. How often do you have difficulty relaxing or unwinding at the end of the day due to stress?",
+    "7. How often do you experience changes in your appetite due to stress?",
+    "8. How often do you experience muscle tension or pain due to stress?",
+    "9. How often do you have racing thoughts or constant worrying due to stress?",
+    "10. How often do you feel emotionally drained or exhausted due to stress?"
 ]
 
 depression_questions = [
-    "How often do you feel sad or hopeless?",
-    "How often do you find it difficult to enjoy activities you once enjoyed?",
-    "How often do you isolate yourself from others?",
-    "How often do you have persistent physical symptoms like body aches or tension?"
+    "1. How often do you feel sad or hopeless?",
+    "2. How often do you find it difficult to enjoy activities you once enjoyed?",
+    "3. How often do you isolate yourself from others?",
+    "4. How often do you have persistent physical symptoms like body aches or tension?",
+    "5. How often do you have trouble concentrating or making decisions due to sadness?",
+    "6. How often do you experience changes in your sleep patterns (e.g., sleeping too much or too little) due to sadness?",
+    "7. How often do you feel like you've lost interest or pleasure in most things you used to enjoy?",
+    "8. How often do you feel a sense of worthlessness or excessive guilt?",
+    "9. How often do you have changes in appetite or weight due to depression?",
+    "10. How often do you have thoughts of self-harm or suicide?"
 ]
 
 anxiety_questions = [
-    "How often do you feel nervous or anxious?",
-    "How often do you have difficulty concentrating due to anxiety?",
-    "How often do you experience excessive worry about various aspects of your life?",
-    "How often do you feel fatigued or lack energy due to anxiety?"
+    "1. How often do you feel nervous or anxious?",
+    "2. How often do you have difficulty concentrating due to anxiety?",
+    "3. How often do you experience excessive worry about various aspects of your life?",
+    "4. How often do you feel fatigued or lack energy due to anxiety?",
+    "5. How often do you have restlessness or a feeling of being on edge due to anxiety?",
+    "6. How often do you have muscle tension or body aches due to anxiety?",
+    "7. How often do you avoid situations or places due to anxiety?",
+    "8. How often do you experience a racing heart or palpitations due to anxiety?",
+    "9. How often do you have trouble falling or staying asleep due to anxiety?",
+    "10. How often do you experience shortness of breath or a choking sensation due to anxiety?"
 ]
+
 
 # Create global variables to keep track of responses for each condition
 stress_responses = []
@@ -35,19 +54,24 @@ anxiety_responses = []
 # Assign weights to questions for each condition
 question_weights = [
     # Stress
-    [3, 3, 2, 2],
+    [3, 3, 2, 2, 1, 1, 1, 1, 1, 2],
 
     # Depression
-    [2, 3, 2, 1],
+    [2, 3, 2, 1, 1, 2, 1, 2, 1, 1],
 
     # Anxiety
-    [3, 2, 3, 2]
+    [3, 2, 3, 2, 1, 2, 2, 3, 1, 1]
 ]
 
 def calculate_score(responses, weights):
     return sum([int(response) * weight for response, weight in zip(responses, weights)])
-# Stress assessment
+
 @app.route('/')
+def greet():
+    return render_template('greeting.html')
+
+# Stress assessment
+@app.route('/stress')
 def stress():
     return render_template('stress.html', question=stress_questions[0])
 
