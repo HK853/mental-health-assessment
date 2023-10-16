@@ -35,7 +35,13 @@ body,html{
 .card-footer{
 border-radius: 0 0 15px 15px !important;
 	border-top: 0 !important;
+	text-align: center;
 }
+
+.card-footer cite{
+	   color: #636363;
+	}
+
 .container{
 	align-content: center;
 }

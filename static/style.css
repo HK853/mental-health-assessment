@@ -55,7 +55,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
     cursor: pointer;
-    background: #3498db;
+    background: linear-gradient(to right, #4cd137, rgb(171, 52, 171));
     border: 1px solid #3498db;
     border-radius: 2px;
 }
@@ -63,8 +63,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 input[type="range"]::-webkit-slider-thumb {
     height: 20px;
     width: 20px;
-    background: #3498db;
-    border: 1px solid #3498db;
+    background: linear-gradient(to right, #4cd137, rgb(171, 52, 171));
+    border: 1px solid transparent;
     border-radius: 50%;
     cursor: pointer;
     -webkit-appearance: none;
@@ -76,7 +76,7 @@ input[type="submit"] {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #3498db;
+    background: linear-gradient(45deg, #4cd137, #3498db, rgb(171, 52, 171));
     color: #fff;
     border: none;
     border-radius: 5px;

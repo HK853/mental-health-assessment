@@ -85,6 +85,7 @@ def stress_answer():
     else:
         stress_score = calculate_score(stress_responses, question_weights[0])
         # Determine stress level based on the score
+        print(stress_score)
         if stress_score < 8:
             session['stress_level'] = "Low"
         elif stress_score < 15 and stress_score >= 8:
@@ -113,6 +114,7 @@ def depression_answer():
     else:
         depression_score = calculate_score(depression_responses, question_weights[1])
         # Determine depression level based on the score
+        print(depression_score)
         if depression_score < 8:
             session['depression_level'] = "Low"
         elif depression_score < 15 and depression_score >= 8:
@@ -140,6 +142,7 @@ def anxiety_answer():
     else:
         anxiety_score = calculate_score(anxiety_responses, question_weights[2])
         # Determine anxiety level based on the score
+        print(anxiety_score)
         if anxiety_score < 8:
             session['anxiety_level'] = "Low"
         elif anxiety_score < 15 and anxiety_score >= 8:
