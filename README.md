@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Mental Health Assessment
+## Mental Health Assessment
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -37,6 +36,3 @@ Before you begin, ensure you have met the following requirements:
    python app.py
    ```
 
-=======
-# mental-health-assessment
->>>>>>> 87e40f8b0637b489890ddddd0b077d33faf4f4cf
