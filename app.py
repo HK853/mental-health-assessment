@@ -1,10 +1,4 @@
-# from flask import Flask, render_template, request, redirect, url_for, session
 
-# app = Flask(__name__, template_folder="templates")
-
-# # Set the secret key to enable sessions
-# app.secret_key = 'your_secret_key'  # Replace with a secure secret key
-# from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from pymongo import MongoClient
 from flask_pymongo import PyMongo
@@ -14,11 +8,6 @@ import json
 
 app = Flask(__name__, template_folder="templates")
 app.secret_key = 'your_secret_key'
-
-
-# app.config["MONGO_URI"] = "mongodb://localhost:27017/mydatabase"
-# mongo = PyMongo(app)
-
 
 
 
@@ -140,11 +129,11 @@ def stress_answer():
         # Determine stress level based on the score
         print(stress_score)
         if stress_score < 8:
-            session['stress_level'] = "Low"
+            session['stress_level'] = "Your stress level is low. Continue practicing stress management techniques and maintain a balanced lifestyle."
         elif stress_score < 15 and stress_score >= 8:
-            session['stress_level'] = "Normal"
+            session['stress_level'] = "Your stress level is within the normal range. Keep up with self-care and stress reduction methods."
         else:
-            session['stress_level'] = "High"
+            session['stress_level'] = "Your stress level is high. Consider consulting with a mental health professional for guidance and support."
 
         # Redirect to the depression assessment
         return redirect(url_for('depression'))
@@ -169,11 +158,11 @@ def depression_answer():
         # Determine depression level based on the score
         print(depression_score)
         if depression_score < 8:
-            session['depression_level'] = "Low"
+            session['depression_level'] = "Your depression level is low. Stay connected with your support network and focus on positive activities."
         elif depression_score < 15 and depression_score >= 8:
-            session['depression_level'] = "Normal"
+            session['depression_level'] = "Your depression level is normal. Continue self-care and consider talking to a counselor if needed."
         else:
-            session['depression_level'] = "High"
+            session['depression_level'] = "Your depression level is high. Seek professional help to address your symptoms and develop a treatment plan."
 
         # Redirect to the anxiety assessment
         return redirect(url_for('anxiety'))
@@ -197,11 +186,11 @@ def anxiety_answer():
         # Determine anxiety level based on the score
         print(anxiety_score)
         if anxiety_score < 8:
-            session['anxiety_level'] = "Low"
+            session['anxiety_level'] = "Your anxiety level is low. Practice relaxation techniques and maintain a stress-reducing lifestyle."
         elif anxiety_score < 15 and anxiety_score >= 8:
-            session['anxiety_level'] = "Normal"
+            session['anxiety_level'] = "Your anxiety level is normal. Keep up with stress management and consider therapy for further assistance."
         else:
-            session['anxiety_level'] = "High"
+            session['anxiety_level'] = "Your anxiety level is high. Consult with a mental health specialist for coping strategies and treatment options."
 
         # Get stress and depression levels from the session
         stress_level = session.get('stress_level', 'Not assessed')

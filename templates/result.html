@@ -97,7 +97,7 @@
     <div class="container-fluid h-100">
         <div class="row justify-content-center h-100">
             <div class="col-md-8 col-xl-6 chat">
-                <div class="card">
+                <div class="card" style="height: 70vh;">
                     <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
                             <div class="img_cont">
@@ -113,29 +113,89 @@
                     <div id="messageFormeight" class="card-body msg_card_body">
                         <div class="container">
                             <div class="result">
-                                <h2>Stress Level: {{ stress_level }}</h2>
-                                <p style="color: rgb(135, 135, 135); font-size: 15px;">Stress level indicates the severity of your stress.</p>
-                                <h2>Depression Level: {{ depression_level }}</h2>
-                                <p style="color: rgb(135, 135, 135); font-size: 15px;">Depression level indicates the severity of your depression.</p>
-                                <h2>Anxiety Level: {{ anxiety_level }}</h2>
-                                <p style="color: rgb(135, 135, 135); font-size: 15px;">Anxiety level indicates the severity of your anxiety.</p>
+                                <h2>Stress Level:</h2>
+                                <p style="color: rgb(135, 135, 135); font-size: 20px;">{{ stress_level }}</p>
                             </div>
+
+                            <div class="result">
+                                <h2>Depression Level:</h2>
+                                <p style="color: rgb(135, 135, 135); font-size: 20px;">{{ depression_level }}</p>
+                            </div>
+
+                            <div class="result">
+                                <h2>Anxiety Level:</h2>
+                                <p style="color: rgb(135, 135, 135); font-size: 20px;">{{ anxiety_level }}</p>
+                            </div>
+
                         </div>
                     </div>
-                    <!-- <div class="card-footer">
-                         <h1>Stress Assessment</h1>
-                        <form action="/stress-answer" method="post">
-                            <label>{{ question }}</label>
-                            <input type="range" name="response" min="0" max="10" step="1" class="range-slider"
-                                oninput="updateRangeValue(this)">
-                            <span id="range-value">0</span>
-                            <input type="submit" value="Next">
-                        </form> 
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+<!-- 
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-md-8 col-xl-6 chat">
+                <div class="card">
+                    <div class="card-header msg_head">
+                        <div class="d-flex bd-highlight">
+                            <div class="img_cont">
+                                <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png"
+                                    class="rounded-circle user_img">
+                                <span class="online_icon"></span>
+                            </div>
+                            <div class="user_info">
+                                <span>Mental Health Assessment Result</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="messageFormeight" class="card-body msg_card_body">
+                        <div class="container">
+                            <div class="result">
+                                <h2>Depression Level: {{ depression_level }}</h2>
+                                <p style="color: rgb(135, 135, 135); font-size: 15px;"></p>
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-md-8 col-xl-6 chat">
+                <div class="card">
+                    <div class="card-header msg_head">
+                        <div class="d-flex bd-highlight">
+                            <div class="img_cont">
+                                <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png"
+                                    class="rounded-circle user_img">
+                                <span class="online_icon"></span>
+                            </div>
+                            <div class="user_info">
+                                <span>Mental Health Assessment Result</span>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <div id="messageFormeight" class="card-body msg_card_body">
+                        <div class="container">
+                            <div class="result">
+                                <h2>Anxiety Level: {{ anxiety_level }}</h2>
+                                <p style="color: rgb(135, 135, 135); font-size: 15px;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
 
 </body>
 
