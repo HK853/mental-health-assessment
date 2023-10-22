@@ -60,13 +60,13 @@ anxiety_responses = []
 # Assign weights to questions for each condition
 question_weights = [
     # Stress
-    [3, 3, 2, 2, 1, 1, 1, 1, 1, 2],
+    [2, 1, 1, 1, 1, 1, 0, 1, 1, 1],
 
     # Depression
-    [2, 3, 2, 1, 1, 2, 1, 2, 1, 1],
+    [2, 1, 1, 1, 1, 2, 1, 2, 1, 1],
 
     # Anxiety
-    [3, 2, 3, 2, 1, 2, 2, 3, 1, 1]
+    [3, 2, 3, 2, 1, 1, 1, 1, 1, 1]
 ]
 
 
@@ -128,9 +128,9 @@ def stress_answer():
         stress_score = calculate_score(stress_responses, question_weights[0])
         # Determine stress level based on the score
         print(stress_score)
-        if stress_score < 8:
+        if stress_score < 4:
             session['stress_level'] = "Your stress level is low. Continue practicing stress management techniques and maintain a balanced lifestyle."
-        elif stress_score < 15 and stress_score >= 8:
+        elif stress_score < 9 and stress_score >= 5:
             session['stress_level'] = "Your stress level is within the normal range. Keep up with self-care and stress reduction methods."
         else:
             session['stress_level'] = "Your stress level is high. Consider consulting with a mental health professional for guidance and support."
@@ -159,7 +159,7 @@ def depression_answer():
         print(depression_score)
         if depression_score < 8:
             session['depression_level'] = "Your depression level is low. Stay connected with your support network and focus on positive activities."
-        elif depression_score < 15 and depression_score >= 8:
+        elif depression_score < 10 and depression_score >= 8:
             session['depression_level'] = "Your depression level is normal. Continue self-care and consider talking to a counselor if needed."
         else:
             session['depression_level'] = "Your depression level is high. Seek professional help to address your symptoms and develop a treatment plan."
@@ -187,7 +187,7 @@ def anxiety_answer():
         print(anxiety_score)
         if anxiety_score < 8:
             session['anxiety_level'] = "Your anxiety level is low. Practice relaxation techniques and maintain a stress-reducing lifestyle."
-        elif anxiety_score < 15 and anxiety_score >= 8:
+        elif anxiety_score < 12 and anxiety_score >= 8:
             session['anxiety_level'] = "Your anxiety level is normal. Keep up with stress management and consider therapy for further assistance."
         else:
             session['anxiety_level'] = "Your anxiety level is high. Consult with a mental health specialist for coping strategies and treatment options."
