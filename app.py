@@ -1,9 +1,26 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+# from flask import Flask, render_template, request, redirect, url_for, session
+
+# app = Flask(__name__, template_folder="templates")
+
+# # Set the secret key to enable sessions
+# app.secret_key = 'your_secret_key'  # Replace with a secure secret key
+# from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from pymongo import MongoClient
+from flask_pymongo import PyMongo
+from werkzeug.security import generate_password_hash, check_password_hash
+import db
+import json
 
 app = Flask(__name__, template_folder="templates")
+app.secret_key = 'your_secret_key'
 
-# Set the secret key to enable sessions
-app.secret_key = 'your_secret_key'  # Replace with a secure secret key
+
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/mydatabase"
+# mongo = PyMongo(app)
+
+
+
 
 # Define questions for each condition
 stress_questions = [
@@ -63,12 +80,48 @@ question_weights = [
     [3, 2, 3, 2, 1, 2, 2, 3, 1, 1]
 ]
 
+
 def calculate_score(responses, weights):
     return sum([int(response) * weight for response, weight in zip(responses, weights)])
 
-@app.route('/')
+
+# login condition
+
+@app.route('/', methods = ['GET', 'POST'])
+def home():
+    return render_template("signin.html")
+
+
+@app.route('/signup', methods = ['GET', 'POST'])
+def signup():
+    return render_template("signup.html")
+
+
+
+@app.route('/signin', methods = ['GET', 'POST'])
+def signin():
+    status, username = db.check_user()
+
+    data = {
+        "username": username,
+        "status": status
+    }
+
+    return json.dumps(data)
+
+
+@app.route('/register', methods = ['GET', 'POST'])
+def register():
+    status = db.insert_data()
+    return json.dumps(status)
+
+
+#  login end
+
+
+@app.route('/greet')
 def greet():
-    return render_template('greeting.html')
+     return render_template('greeting.html')
 
 # Stress assessment
 @app.route('/stress')
