@@ -104,7 +104,6 @@ def register():
     status = db.insert_data()
     return json.dumps(status)
 
-
 #  login end
 
 
@@ -112,9 +111,11 @@ def register():
 def greet():
      return render_template('greeting.html')
 
+
 # Stress assessment
 @app.route('/stress')
 def stress():
+    # Clear depression responses and start stress assessment
     return render_template('stress.html', question=stress_questions[0])
 
 @app.route('/stress-answer', methods=['POST'])
@@ -128,50 +129,23 @@ def stress_answer():
         stress_score = calculate_score(stress_responses, question_weights[0])
         # Determine stress level based on the score
         print(stress_score)
-        if stress_score < 4:
+        if stress_score < 8:
             session['stress_level'] = "Your stress level is low. Continue practicing stress management techniques and maintain a balanced lifestyle."
-        elif stress_score < 9 and stress_score >= 5:
+        elif stress_score < 16  and stress_score >= 8:
             session['stress_level'] = "Your stress level is within the normal range. Keep up with self-care and stress reduction methods."
         else:
             session['stress_level'] = "Your stress level is high. Consider consulting with a mental health professional for guidance and support."
 
         # Redirect to the depression assessment
-        return redirect(url_for('depression'))
-
-
-# Depression assessment
-@app.route('/depression')
-def depression():
-    # Clear stress responses and start depression assessment
-    stress_responses.clear()
-    return render_template('depression.html', question=depression_questions[0])
-
-@app.route('/depression-answer', methods=['POST'])
-def depression_answer():
-    response = request.form.get('response')
-    depression_responses.append(response)
-
-    if len(depression_responses) < len(depression_questions):
-        return render_template('depression.html', question=depression_questions[len(depression_responses)])
-    else:
-        depression_score = calculate_score(depression_responses, question_weights[1])
-        # Determine depression level based on the score
-        print(depression_score)
-        if depression_score < 8:
-            session['depression_level'] = "Your depression level is low. Stay connected with your support network and focus on positive activities."
-        elif depression_score < 10 and depression_score >= 8:
-            session['depression_level'] = "Your depression level is normal. Continue self-care and consider talking to a counselor if needed."
-        else:
-            session['depression_level'] = "Your depression level is high. Seek professional help to address your symptoms and develop a treatment plan."
-
-        # Redirect to the anxiety assessment
         return redirect(url_for('anxiety'))
+    
+
 
 # Anxiety assessment
 @app.route('/anxiety')
 def anxiety():
     # Clear depression responses and start anxiety assessment
-    depression_responses.clear()
+    stress_responses.clear()
     return render_template('anxiety.html', question=anxiety_questions[0])
 
 @app.route('/anxiety-answer', methods=['POST'])
@@ -185,18 +159,49 @@ def anxiety_answer():
         anxiety_score = calculate_score(anxiety_responses, question_weights[2])
         # Determine anxiety level based on the score
         print(anxiety_score)
-        if anxiety_score < 8:
+        if anxiety_score < 12:
             session['anxiety_level'] = "Your anxiety level is low. Practice relaxation techniques and maintain a stress-reducing lifestyle."
-        elif anxiety_score < 12 and anxiety_score >= 8:
+        elif anxiety_score < 16 and anxiety_score >= 12:
             session['anxiety_level'] = "Your anxiety level is normal. Keep up with stress management and consider therapy for further assistance."
         else:
             session['anxiety_level'] = "Your anxiety level is high. Consult with a mental health specialist for coping strategies and treatment options."
+        
+        return redirect(url_for('depression'))
+    
+      
 
-        # Get stress and depression levels from the session
+# Depression assessment
+@app.route('/depression')
+def depression():
+    # Clear stress responses and start depression assessment
+    anxiety_responses.clear()
+    return render_template('depression.html', question=depression_questions[0])
+
+@app.route('/depression-answer', methods=['POST'])
+def depression_answer():
+    response = request.form.get('response')
+    depression_responses.append(response)
+
+    if len(depression_responses) < len(depression_questions):
+        return render_template('depression.html', question=depression_questions[len(depression_responses)])
+    else:
+        depression_score = calculate_score(depression_responses, question_weights[1])
+        # Determine depression level based on the score
+        print(depression_score)
+        if depression_score < 12:
+            session['depression_level'] = "Your depression level is low. Stay connected with your support network and focus on positive activities."
+        elif depression_score < 27 and depression_score >= 12:
+            session['depression_level'] = "Your depression level is normal. Continue self-care and consider talking to a counselor if needed."
+        else:
+            session['depression_level'] = "Your depression level is high. Seek professional help to address your symptoms and develop a treatment plan."
+        
+        
+         # Get stress and depression levels from the session
         stress_level = session.get('stress_level', 'Not assessed')
-        depression_level = session.get('depression_level', 'Not assessed')
+        anxiety_level = session.get('anxiety_level', 'Not assessed')
         # Display the final result
-        return render_template('result.html', stress_level=stress_level, depression_level=depression_level, anxiety_level=session['anxiety_level'])
+        return render_template('result.html', anxiety_level=anxiety_level, stress_level=stress_level, depression_level=session['depression_level'])
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -25,7 +25,8 @@
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
                         <div style="margin-bottom:10px">
-                            <label class="label-agree-term" id="error_message" style="color: red;display: none;"></label>
+                            <label class="label-agree-term" id="error_message"
+                                style="color: red;display: none;"></label>
                         </div>
                         <form method="POST" class="register-form" id="register-form">
                             <div class="form-group">
@@ -36,6 +37,21 @@
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
                                 <input type="email" name="email" id="email" placeholder="Your Email" />
                             </div>
+
+                            <!-- age -->
+                            <div class="form-group">
+                                <label for="age"><i class="zmdi zmdi-calendar"></i></label>
+                                <input type="number" name="age" id="age" placeholder="Your Age" />
+                            </div>
+                            <!-- age -->
+
+                            <!-- gender -->
+                            <div class="form-group">
+                                <label for="gender"><i class="zmdi zmdi-male-female"></i></label>
+                                <input type="text" name="gender" id="gender" placeholder="Your Gender" />
+                            </div>
+
+                            <!-- gender -->
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="pass" id="pass" placeholder="Password" />
@@ -50,10 +66,12 @@
                                 </label>
                             </div>
                             <div class="form-button">
-                                <input type="button" name="signup" id="signup" class="form-submit" onclick="register();" value="Register" />
+                                <input type="button" name="signup" id="signup" class="form-submit" onclick="register();"
+                                    value="Register" />
                             </div>
                             <div style="margin-top:5px;">
-                                <label class="label-agree-term" id="signup_message" style="color: green;display: none;">Registeration Successfully</label>
+                                <label class="label-agree-term" id="signup_message"
+                                    style="color: green;display: none;">Registeration Successfully</label>
                             </div>
                         </form>
                     </div>
@@ -72,51 +90,105 @@
 
     <script type="text/javascript">
 
-        function register(){
+//         function register() {
+// // added
+//             if (($("#name").val() == '') || ($("#email").val() == "") ||
+//                 ($("#pass").val() == '') || ($("#repass").val() == "")
+//                 ($("#age").val() == '') || ($("#gender").val() == "") 
+//                 ){
 
-            if (($("#name").val() == '') || ($("#email").val() == "")||
-                ($("#pass").val() == '') || ($("#repass").val() == "")){
+//                 $("#error_message").text("All fields are required");
+//                 $("#error_message").show(0).delay(3000).hide(0);
+//             }
+//             else if ($("#pass").val() != $("#repass").val()) {
+//                 $("#error_message").text("Passwords are not same");
+//                 $("#error_message").show(0).delay(3000).hide(0);
+//             }
 
-                $("#error_message").text("All fields are required");
-                $("#error_message").show(0).delay(3000).hide(0);
-            } 
-            else if ($("#pass").val() != $("#repass").val()){
-                $("#error_message").text("Passwords are not same");
-                $("#error_message").show(0).delay(3000).hide(0);
+//             else {
+//                 var data = new FormData();
+//                 data.append('name', $("#name").val());
+//                 data.append('email', $("#email").val());
+//                 data.append('pass', $("#pass").val());
+//                 // added
+//                 data.append('age', $("#age").val());    
+//                 data.append('gender', $("gender").val());
+
+//                 $.ajax({
+//                     type: 'POST',
+//                     enctype: 'multipart/form-data',
+//                     url: '/register',
+//                     processData: false,
+//                     cache: false,
+//                     timeout: 800000,
+//                     contentType: false,
+//                     data: data,
+//                     success: function (response) {
+//                         var data = JSON.parse(response);
+//                         if (data == true) {
+//                             $('#signup_message').show(0).delay(3000).hide(0);
+
+//                             setTimeout(function () {
+//                                 window.location = "/";
+//                             }, 3000);
+
+//                         } else {
+//                             $("#error_message").text("Email Id was already exists.");
+//                             $("#error_message").show(0).delay(3000).hide(0);
+//                         }
+//                     }
+//                 });
+//             }
+//         }
+
+function register() {
+    if (
+        ($("#name").val() == '') || 
+        ($("#email").val() == '') ||
+        ($("#pass").val() == '') ||
+        ($("#repass").val() == '') ||
+        ($("#age").val() == '') ||    // Check for age field
+        ($("#gender").val() == '')    // Check for gender field
+    ) {
+        $("#error_message").text("All fields are required");
+        $("#error_message").show(0).delay(3000).hide(0);
+    } else if ($("#pass").val() != $("#repass").val()) {
+        $("#error_message").text("Passwords are not the same");
+        $("#error_message").show(0).delay(3000).hide(0);
+    } else {
+        var data = new FormData();
+        data.append('name', $("#name").val());
+        data.append('email', $("#email").val());
+        data.append('pass', $("#pass").val());
+        data.append('age', $("#age").val());      // Include age in the FormData
+        data.append('gender', $("#gender").val());  // Include gender in the FormData
+
+        $.ajax({
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            url: '/register',
+            processData: false,
+            cache: false,
+            timeout: 800000,
+            contentType: false,
+            data: data,
+            success: function (response) {
+                var data = JSON.parse(response);
+                if (data == true) {
+                    $('#signup_message').show(0).delay(3000).hide(0);
+
+                    setTimeout(function () {
+                        window.location = "/";
+                    }, 3000);
+                } else {
+                    $("#error_message").text("Email Id already exists.");
+                    $("#error_message").show(0).delay(3000).hide(0);
+                }
             }
+        });
+    }
+}
 
-            else {
-                var data = new FormData();
-                data.append('name', $("#name").val());
-                data.append('email', $("#email").val());
-                data.append('pass', $("#pass").val());
-
-                $.ajax({
-                    type: 'POST',
-                    enctype: 'multipart/form-data',
-                    url: '/register',
-                    processData: false,
-                    cache: false,
-                    timeout: 800000,
-                    contentType: false,
-                    data: data,
-                    success: function(response) {
-                        var data = JSON.parse(response);
-                        if (data == true){
-                            $('#signup_message').show(0).delay(3000).hide(0);
-
-                            setTimeout(function() {
-                                window.location = "/";
-                            }, 3000);
-
-                        } else{                           
-                            $("#error_message").text("Email Id was already exists.");
-                            $("#error_message").show(0).delay(3000).hide(0);
-                        }
-                    }
-                });
-            }
-        }
 
     </script>
 </body>

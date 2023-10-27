@@ -1,9 +1,19 @@
 import pymongo
 from flask import request
 
+from flask import Flask
+from flask_pymongo import PyMongo
+
+app = Flask(__name__)
+
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/yourdb'  # Replace with your MongoDB URI
+mongo = PyMongo(app)
+
+
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017/mydatabase')
 userdb = client['user']
 users = userdb.customers
+
 
 
 def insert_data():
@@ -11,11 +21,16 @@ def insert_data():
 		name = request.form['name']
 		email = request.form['email']
 		password = request.form['pass']
+		age = request.form['age']
+		gender = request.form['gender']
 
 		reg_user = {}
 		reg_user['name'] = name
 		reg_user['email'] = email
 		reg_user['password'] = password
+		reg_user['age'] = age
+		reg_user['gender'] = gender
+		
 
 		if users.find_one({"email":email}) == None:
 			users.insert_one(reg_user)
@@ -40,3 +55,4 @@ def check_user():
 			return False, ""
 		else:
 			return True, user_data["name"]
+		
